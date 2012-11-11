@@ -17,6 +17,8 @@ public class TestJava {
 	private String selectAtribute = "SELECT aluno_name, aluno_rg, aluno_end FROM ALUNO WHERE usuario_rg = "+rg+"";
 	
 	static{
+		 
+		
 		
 		String updateTeste = "UPDATE ALUNO SET ALUNO_name = ?, ALUNO_sobrenome = ?, WHERE ALUNO_name=?";
 	
