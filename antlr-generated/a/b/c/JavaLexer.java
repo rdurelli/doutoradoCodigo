@@ -9,6 +9,7 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+
 @SuppressWarnings({"all", "warnings", "unchecked"})
 public class JavaLexer extends Lexer {
     public static final int EOF=-1;
