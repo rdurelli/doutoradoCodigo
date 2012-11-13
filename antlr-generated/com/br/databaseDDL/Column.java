@@ -5,6 +5,10 @@ public class Column implements Comparable<Column>{
 	
 	private String columnName;
 	
+	private String columnType;
+	
+	private Boolean isPrimaryKey;
+	
 	public Column(String columnName) {
 		
 		this.columnName = columnName;
@@ -17,6 +21,22 @@ public class Column implements Comparable<Column>{
 	
 	public void setColumnName(String columnName) {
 		this.columnName = columnName;
+	}
+	
+	public String getColumnType() {
+		return columnType;
+	}
+	
+	public void setColumnType(String columnType) {
+		this.columnType = columnType;
+	}
+	
+	public Boolean getIsPrimaryKey() {
+		return isPrimaryKey;
+	}
+	
+	public void setIsPrimaryKey(Boolean isPrimaryKey) {
+		this.isPrimaryKey = isPrimaryKey;
 	}
 
 	@Override
