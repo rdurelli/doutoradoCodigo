@@ -1,11 +1,13 @@
 package a.b.c.test;
 
 import java.sql.Connection;
+import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Iterator;
 
 import com.br.connection.factory.ConnectionFactory;
 
@@ -52,6 +54,18 @@ public class JavaMysqlTeste {
         }
       
       System.out.println("Conectou ");
+      
+      DatabaseMetaData metaData = connection.getMetaData();
+      
+      ResultSet rSeltMeta = metaData.getTables(null, null, "%", null);
+      
+      
+      
+      while (rSeltMeta.next()) {
+		
+    	  System.out.println("Tables Names " + rSeltMeta.getString(3));
+    	  
+	}
     }
 }
 
