@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Enumeration;
@@ -574,7 +575,7 @@ public class Teste1 {
 
 				}
 				
-				
+				//obtain the type of the columns by using the MetaData of JDBC...
 				getColumnType(dataBase.getDataBaseTables());
 				
 				
@@ -786,14 +787,21 @@ public class Teste1 {
 			
 		    ResultSet rSeltMeta = metaData.getTables(null, null, "%", null);
 		      
-		      
+		      int i = 0;
 		      while (rSeltMeta.next()) {
 				
 		    	  if (tables.contains(new Table(rSeltMeta.getString(3)))){
 		    		  
-		    		  System.err.println("Sim contem ");
+//		    		  System.err.println("Sim contem ");
+		    		  
+		    		  ResultSet resultSetMetaData = stmt.executeQuery("SELECT * FROM "+ rSeltMeta.getString(3));
+		    		  
+		    		  ResultSetMetaData rsMeta = resultSetMetaData.getMetaData();
+		    		  
+		    		  
 		    		  
 		    	  }
+		    	  i++;
 		    	  
 		    	  
 			}
