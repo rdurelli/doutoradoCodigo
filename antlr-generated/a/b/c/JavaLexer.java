@@ -1,4 +1,4 @@
-// $ANTLR 3.4 /Users/rafaeldurelli/Documents/workspace/ANTLR Java Tester/src/a/b/c/Java.g 2012-11-09 14:05:19
+// $ANTLR 3.4 /Users/rafaeldurelli/Documents/workspace/ANTLR Java Tester/src/a/b/c/Java.g 2012-11-15 16:12:41
 
   //packager of my parser
   package a.b.c;
@@ -8,7 +8,6 @@ import org.antlr.runtime.*;
 import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
-
 
 @SuppressWarnings({"all", "warnings", "unchecked"})
 public class JavaLexer extends Lexer {

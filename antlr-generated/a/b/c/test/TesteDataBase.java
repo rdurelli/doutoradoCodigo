@@ -1,8 +1,11 @@
-package com.br.databaseDDL;
+package a.b.c.test;
 
 import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
+
+import com.br.databaseDDL.DataBase;
+import com.br.databaseDDL.Table;
 
 public class TesteDataBase {
 	

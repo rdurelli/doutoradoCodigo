@@ -18,6 +18,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
+import javax.swing.text.StyledEditorKit.ItalicAction;
+
 import org.antlr.runtime.ANTLRStringStream;
 import org.antlr.runtime.CharStream;
 import org.antlr.runtime.CommonTokenStream;
@@ -556,6 +558,8 @@ public class Teste1 {
 				//
 				// }
 
+				getColumnType(dataBase.getDataBaseTables());
+				
 				while (iterator.hasNext()) {
 					Table table = (Table) iterator.next();
 
@@ -571,12 +575,19 @@ public class Teste1 {
 
 						System.out.println("Nome da COluna "
 								+ column.getColumnName());
+						
+						System.out.println("O type das colunas são "
+								+ column.getColumnType());
+						
+						System.out.println("Is primary KEY "
+								+ column.getIsPrimaryKey());
 					}
 
 				}
 				
 				//obtain the type of the columns by using the MetaData of JDBC...
-				getColumnType(dataBase.getDataBaseTables());
+				
+				
 				
 				
 
@@ -787,21 +798,88 @@ public class Teste1 {
 			
 		    ResultSet rSeltMeta = metaData.getTables(null, null, "%", null);
 		      
-		      int i = 0;
 		      while (rSeltMeta.next()) {
 				
 		    	  if (tables.contains(new Table(rSeltMeta.getString(3)))){
 		    		  
+		    		  Table tablesObtained = tables.iterator().next();
+		    		  
+		    		  Set<Column> columnObtained = tablesObtained.getColumnsTable();
+		    		  
+//		    		  System.out.println("O nome da tabela OBTIDA é " + teste.getTableName());
+		    		  
 //		    		  System.err.println("Sim contem ");
 		    		  
-		    		  ResultSet resultSetMetaData = stmt.executeQuery("SELECT * FROM "+ rSeltMeta.getString(3));
+		    		  ResultSet resultSetMetaData = stmt.executeQuery("SELECT * FROM "+ tablesObtained.getTableName());
 		    		  
 		    		  ResultSetMetaData rsMeta = resultSetMetaData.getMetaData();
 		    		  
+		    		  Iterator<Column> iterator = columnObtained.iterator();
 		    		  
+//		    		  Column columnToAddType = columnObtained.iterator().next();
+		    		  
+		    		  for (int j = 0; j < rsMeta.getColumnCount(); j++) {
+						
+		    			  
+		    			  iterator.hasNext();
+		    			  if(columnObtained.contains(new Column(rsMeta.getColumnName(j + 1)))) {
+		    				  
+		    				  Column columnToAddType = iterator.next();
+		    				  
+		    				  System.err.println("O que tem no getColumnName " +rsMeta.getColumnName(j + 1));
+		    				  
+		    				  columnToAddType.setColumnType(rsMeta.getColumnTypeName(j + 1));
+		    				  
+		    				  System.err.println("O nome da COLUNA é " +columnToAddType.getColumnName());
+		    				  
+		    				  System.err.println("O type é COLUNA é " +columnToAddType.getColumnType());
+		    				  
+		    				  if(rsMeta.isAutoIncrement(j + 1)) {
+		    					  
+		    					  columnToAddType.setIsPrimaryKey(true);
+		    					  
+		    				  }else {
+		    					  
+		    					  columnToAddType.setIsPrimaryKey(false);
+		    					  
+		    				  }
+		    				  
+		    				  
+		    			  } else {
+		    				 
+		    				  Column newColumn = new Column(rsMeta.getColumnName(j + 1));
+		    				  System.err.println("O nome da COLUNA no else é " +newColumn.getColumnName());
+		    				  
+		    				  newColumn.setColumnType(rsMeta.getColumnTypeName(j + 1));
+		    				  
+		    				  System.err.println("O type da COLUNA no else é " +newColumn.getColumnType());
+		    				  
+		    				  if(rsMeta.isAutoIncrement(j + 1)) {
+		    					  
+		    					  newColumn.setIsPrimaryKey(true);
+		    					  
+		    				  } else {
+		    					  
+		    					  
+		    					  newColumn.setIsPrimaryKey(false);
+		    					  
+		    				  }
+		    				  columnObtained.add(newColumn);
+		    				  columnObtained.iterator().hasNext();
+
+		    			  }
+		    			  
+		    			  
+//		    			  	System.out.println(rsMeta.getColumnTypeName(j + 1));
+//		    	            System.out.println(rsMeta.getColumnType(j + 1));
+//		    	            System.out.println(rsMeta.getColumnDisplaySize(j + 1));
+//		    	            System.out.println(rsMeta.getColumnName(j + 1));
+//		    	            System.out.println(rsMeta.isAutoIncrement(j + 1));
+		    			  
+					}
 		    		  
 		    	  }
-		    	  i++;
+		    	  
 		    	  
 		    	  
 			}
